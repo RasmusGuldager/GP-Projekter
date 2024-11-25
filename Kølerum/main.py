@@ -58,7 +58,7 @@ class simple_termostat:
 
 class smart_termostat:
     def __init__(self):
-        self.target_temp = 0
+        self.target_temp = 6.2
 
     def check_compressor(self, cooling_room_instance):
         if cooling_room_instance.temp > self.target_temp:
@@ -71,13 +71,15 @@ def Main():
     kwh_price = pd.read_csv('elpris.csv')['Pris']
     total_cost = 0
 
-    iterations = 1000
+    iterations = 500
+
+    #history = []
 
     for i in range(iterations):
         cooling_room_instance = cooling_room()
         cost = price()
-        termostat = simple_termostat()
-
+        termostat = smart_termostat()
+        #termostat.target_temp += i * 0.01
         for j in range(8640):
             cooling_room_instance.check_door()
             termostat.check_compressor(cooling_room_instance)
@@ -85,12 +87,13 @@ def Main():
             cost.update_total_price(cooling_room_instance, kwh_price[j])
         
         total_cost += cost.total_price
+        #history.append(cost.total_price)
     
 
     avg_cost = total_cost / iterations
 
     print(f"Avg cost pr month is {math.floor(avg_cost)} DKK\n" + f"Calculated on {iterations} iterations")
-
+    #print(f"{min(history)}, {history.index(min(history))}")
 
 if __name__ == '__main__':
     Main()
