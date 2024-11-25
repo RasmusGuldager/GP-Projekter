@@ -11,7 +11,7 @@ class cooling_room:
         self.compressor_temp = -5
     
     def check_door(self):
-        if np.random.randint(0, 11) == 10:
+        if np.random.randint(1, 11) == 10:
             self.door = "open"
         else:
             self.door = "closed"
@@ -80,8 +80,8 @@ def Main():
 
         for j in range(8640):
             cooling_room_instance.check_door()
-            cooling_room_instance.update_temp()
             termostat.check_compressor(cooling_room_instance)
+            cooling_room_instance.update_temp()
             cost.update_total_price(cooling_room_instance, kwh_price[j])
         
         total_cost += cost.total_price
