@@ -1,5 +1,6 @@
-import math
-import numpy as np
+'''This module contains the thermostat classes.'''
+
+
 
 class simple_thermostat:
     def __init__(self):

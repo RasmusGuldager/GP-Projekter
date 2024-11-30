@@ -1,3 +1,8 @@
+'''This module will run the whole simulation. 
+It will simulate the cooling room and the thermostat for a given number of iterations
+and return a history with data for plots.'''
+
+
 import pandas as pd
 import math
 import numpy as np

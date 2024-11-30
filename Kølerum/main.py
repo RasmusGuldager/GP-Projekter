@@ -1,7 +1,12 @@
+'''This is the main file to run the simulation. 
+It will call the main function from the Simulation file 
+and plot the results if wanted'''
+
+
 from Simulation import main
 import matplotlib.pyplot as plt
 
-
+# Number of iterations
 iterations = 500
 
 
