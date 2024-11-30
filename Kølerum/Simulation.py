@@ -21,7 +21,6 @@ def main(iterations, thermostat_type):
                 termostat.check_compressor(cooling_room_instance)
                 cooling_room_instance.update_temp()
                 cost.update_total_price(cooling_room_instance, kwh_price[j])
-                termostat.target_temp += 0.01
 
         else:  
             termostat = smart_thermostat(kwh_price)
@@ -30,6 +29,7 @@ def main(iterations, thermostat_type):
                 termostat.check_compressor(cooling_room_instance, kwh_price[j])
                 cooling_room_instance.update_temp()
                 cost.update_total_price(cooling_room_instance, kwh_price[j])
+                
         
         total_cost += cost.total_price
         history[i] = cost.total_price
@@ -38,7 +38,6 @@ def main(iterations, thermostat_type):
     avg_cost = total_cost / iterations
 
     print(f"Avg cost pr month is {math.floor(avg_cost)} DKK\n" + f"Calculated on {iterations} iterations")
-    #print(f"{min(history)}, {history.index(min(history))}")
     return history
 
 if __name__ == '__main__':

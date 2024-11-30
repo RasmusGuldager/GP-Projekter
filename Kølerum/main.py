@@ -1,10 +1,8 @@
 from Simulation import main
 import matplotlib.pyplot as plt
-import matplotlib
 
-matplotlib.use('TkAgg')
 
-iterations = 200
+iterations = 500
 
 
 # Choose between 'smart' and 'simple'
@@ -14,6 +12,6 @@ if __name__ == '__main__':
     y = main(iterations, thermostat)
     x = range(len(y))
     plt.plot(x, y)
-    plt.show()
+    #plt.show()
 
 
