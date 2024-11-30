@@ -16,14 +16,20 @@ def main(iterations, thermostat_type):
         cost = price()
         if thermostat_type == 'simple':
             termostat = simple_thermostat()
-        else:  
-            termostat = smart_thermostat()
+            for j in range(8640):
+                cooling_room_instance.check_door()
+                termostat.check_compressor(cooling_room_instance)
+                cooling_room_instance.update_temp()
+                cost.update_total_price(cooling_room_instance, kwh_price[j])
+                termostat.target_temp += 0.01
 
-        for j in range(8640):
-            cooling_room_instance.check_door()
-            termostat.check_compressor(cooling_room_instance)
-            cooling_room_instance.update_temp()
-            cost.update_total_price(cooling_room_instance, kwh_price[j])
+        else:  
+            termostat = smart_thermostat(kwh_price)
+            for j in range(8640):
+                cooling_room_instance.check_door()
+                termostat.check_compressor(cooling_room_instance, kwh_price[j])
+                cooling_room_instance.update_temp()
+                cost.update_total_price(cooling_room_instance, kwh_price[j])
         
         total_cost += cost.total_price
         history[i] = cost.total_price
